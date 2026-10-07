@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin - Starleaks</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body class="admin">
+  <div class="admin-container">
+    <aside>
+      <h2>STARLEAKS</h2>
+      <p>Panel Admin</p>
+      <button onclick="logout()" class="btn-small">Wyloguj</button>
+    </aside>
+    <main>
+      <div class="panel">
+        <h3>Dodaj film</h3>
+        <form id="movieForm">
+          <input type="text" id="title" placeholder="Tytul" required>
+          <input type="text" id="category" placeholder="Kategoria" value="Akcja">
+          <textarea id="desc" rows="3" placeholder="Opis"></textarea>
+          <input type="text" id="image" placeholder="URL obrazka">
+          <input type="text" id="playerUrl" placeholder="Link playera (iframe)" required>
+          <label><input type="checkbox" id="pub" checked> Opublikowany</label>
+          <button type="submit">Dodaj</button>
+        </form>
+      </div>
+      <div class="panel">
+        <h3>Filmy</h3>
+        <div id="movieList"></div>
+      </div>
+    </main>
+  </div>
+  <script src="/admin.js"></script>
+</body>
+</html>

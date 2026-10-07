@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Logowanie - Starleaks</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body class="auth">
+  <div class="auth-box">
+    <h1>STARLEAKS</h1>
+    <form id="loginForm">
+      <input type="email" placeholder="Email" required>
+      <input type="password" placeholder="Haslo" required>
+      <button type="submit">Zaloguj</button>
+    </form>
+    <p>Nie masz konta? <a href="/register">Zarejestruj sie</a></p>
+    <div id="msg"></div>
+  </div>
+  <script>
+    document.getElementById('loginForm').onsubmit = async (e) => {
+      e.preventDefault();
+      const [email, pwd] = e.target.querySelectorAll('input');
+      const res = await fetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: email.value, password: pwd.value })
+      });
+      const data = await res.json();
+      if (res.ok) {
+        localStorage.token = data.token;
+        localStorage.user = JSON.stringify(data.user);
+        location.href = '/';
+      } else {
+        document.getElementById('msg').textContent = data.error || 'Blad';
+      }
+    };
+  </script>
+</body>
+</html>
